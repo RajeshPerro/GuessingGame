@@ -264,7 +264,7 @@ public class Client_StartGame extends javax.swing.JFrame {
 
                 }
 
-                inStream = new DataInputStream(Clientsocket.getInputStream());
+                //inStream = new DataInputStream(Clientsocket.getInputStream());
                 outStream = new DataOutputStream(Clientsocket.getOutputStream());
                 br = new BufferedReader(new InputStreamReader(System.in));
                 if (gamestatus == "1") {
@@ -437,76 +437,76 @@ public class Client_StartGame extends javax.swing.JFrame {
         message[3] = fourth;
     }
 
-    public void handleResponse(String Input) {
-        try {
-            inStream.read(response, 0, 3);
-            Byte b = new Byte(response[0]);
-            int firstResponse = b.intValue();
-            switch (firstResponse) {
-                case 1:
-                    System.out.println("Game Started and Level : " + Input + " Selected!");
-                    msg_area.setText("Level " + Input + " Selected!\n");
-                    msg_area.append("Please guess the Number ->>\n");
-                    break;
-                case 2:
-                    switch (response[2]) {
-                        case 0:
-                            System.out.println("\nyour guess is too big! try again.\n");
-                            msg_area.append("\nyour guess is too big! try again.\n");
-                            msg_area.append("Please guess the Number ->>\n");
-
-                            break;
-                        case 1:
-                            System.out.println("\nyour guess is too low! try again.\n");
-
-                            msg_area.append("\nyour guess is too low! try again.\n");
-                            msg_area.append("Please guess the Number ->>\n");
-                            break;
-                        case 2:
-                            System.out.println("\nPerfect! \nWhat is your name? \nName : ");
-                            msg_area.append("\nPerfect! \nWhat is your name? \n");
-                            sendName = true;
-                            //*********Need to handel this part under the button click*********
-
-                            break;
-
-                        /*The Java byte type is an 8 bit signed integral type with values in the range -128 to +127.
-                                The literal 0xff represents +255 which is outside of that range.*/
-                        case 127:
-                            Byte bNameRes = new Byte(response[1]);
-                            int afterGetName = bNameRes.intValue();
-                            if (afterGetName == 1) {
-                                System.out.println("  ");
-                                msg_area.setText("Server Say's: Thanks! " + Input);
-                                
-                                msg_send.setEnabled(false);
-                            }
-                            break;
-                    }
-                    break;
-
-                case 3:
-                    System.out.println("{0} " + response[0] + " {1} " + response[1] + " {2} " + response[2]);
-                    Byte bHighSc = new Byte(response[2]);
-                    int HighScore = bHighSc.intValue();
-                    if (HighScore == 0) {
-                        System.out.println("\nNo highScore generated!\n");
-
-                        score_show.setText("No Score Generated!!\n");
-                    } else {
-                        System.out.println("\nyour score is : " + HighScore + " Bravo!!\n");
-                        score_show.setText("your score is : " + HighScore + " Bravo!!");
-                        
-                    }
-
-                    break;
-            }
-            System.out.println("Response : " + "{0} " + response[0] + " {1} " + response[1] + " {2} " + response[2]);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Client_StartGame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void handleResponse(String Input) {
+//        try {
+//            inStream.read(response, 0, 3);
+//            Byte b = new Byte(response[0]);
+//            int firstResponse = b.intValue();
+//            switch (firstResponse) {
+//                case 1:
+//                    System.out.println("Game Started and Level : " + Input + " Selected!");
+//                    msg_area.setText("Level " + Input + " Selected!\n");
+//                    msg_area.append("Please guess the Number ->>\n");
+//                    break;
+//                case 2:
+//                    switch (response[2]) {
+//                        case 0:
+//                            System.out.println("\nyour guess is too big! try again.\n");
+//                            msg_area.append("\nyour guess is too big! try again.\n");
+//                            msg_area.append("Please guess the Number ->>\n");
+//
+//                            break;
+//                        case 1:
+//                            System.out.println("\nyour guess is too low! try again.\n");
+//
+//                            msg_area.append("\nyour guess is too low! try again.\n");
+//                            msg_area.append("Please guess the Number ->>\n");
+//                            break;
+//                        case 2:
+//                            System.out.println("\nPerfect! \nWhat is your name? \nName : ");
+//                            msg_area.append("\nPerfect! \nWhat is your name? \n");
+//                            sendName = true;
+//                            //*********Need to handel this part under the button click*********
+//
+//                            break;
+//
+//                        /*The Java byte type is an 8 bit signed integral type with values in the range -128 to +127.
+//                                The literal 0xff represents +255 which is outside of that range.*/
+//                        case 127:
+//                            Byte bNameRes = new Byte(response[1]);
+//                            int afterGetName = bNameRes.intValue();
+//                            if (afterGetName == 1) {
+//                                System.out.println("  ");
+//                                msg_area.setText("Server Say's: Thanks! " + Input);
+//                                
+//                                msg_send.setEnabled(false);
+//                            }
+//                            break;
+//                    }
+//                    break;
+//
+//                case 3:
+//                    System.out.println("{0} " + response[0] + " {1} " + response[1] + " {2} " + response[2]);
+//                    Byte bHighSc = new Byte(response[2]);
+//                    int HighScore = bHighSc.intValue();
+//                    if (HighScore == 0) {
+//                        System.out.println("\nNo highScore generated!\n");
+//
+//                        score_show.setText("No Score Generated!!\n");
+//                    } else {
+//                        System.out.println("\nyour score is : " + HighScore + " Bravo!!\n");
+//                        score_show.setText("your score is : " + HighScore + " Bravo!!");
+//                        
+//                    }
+//
+//                    break;
+//            }
+//            System.out.println("Response : " + "{0} " + response[0] + " {1} " + response[1] + " {2} " + response[2]);
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(Client_StartGame.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton exit_button;
     private javax.swing.JLabel jLabel1;
